@@ -1,27 +1,58 @@
+# **************************************************************************** #
+#                              MINITALK PROJECT                                #
+# **************************************************************************** #
 
-NAME = minitalk
+# === Project ===
+NAME_SERVER	= server
+NAME_CLIENT	= client
 
-SRCS = server.c client.c utils_00.c utils_01.c
-OBJS = $(SRCS:.c=.o)
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# === Compiler ===
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
 
-all: $(NAME)
+# === Paths ===
+SRCS_DIR	= .
+LIBFT_DIR	= lib/libft
+FT_PRINTF_DIR = $(LIBFT_DIR)/ft_printf
+LIBFT		= $(LIBFT_DIR)/libft.a
+FT_PRINTF	= $(FT_PRINTF_DIR)/libftprintf.a
 
-$(NAME): server client
+# === Source Files ===
+SRCS_SERVER	= server.c ft_sigaction.c ft_error.c ft_send.c ft_utils.c
+SRCS_CLIENT	= client.c ft_sigaction.c ft_error.c ft_send.c ft_utils.c
 
-server: server.c utils_00.c utils_01.c minitalk.h
-	$(CC) $(CFLAGS) -o server server.c utils_00.c utils_01.c
+# === Object Files ===
+OBJS_SERVER	= $(SRCS_SERVER:.c=.o)
+OBJS_CLIENT	= $(SRCS_CLIENT:.c=.o)
 
-client: client.c utils_00.c utils_01.c minitalk.h
-	$(CC) $(CFLAGS) -o client client.c utils_00.c utils_01.c
+# === Rules ===
+
+all: $(NAME_SERVER) $(NAME_CLIENT)
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
+
+$(FT_PRINTF):
+	@$(MAKE) -C $(FT_PRINTF_DIR)
+
+$(NAME_SERVER): $(OBJS_SERVER) $(LIBFT) $(FT_PRINTF)
+	$(CC) $(CFLAGS) $(OBJS_SERVER) -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf -o $(NAME_SERVER)
+
+$(NAME_CLIENT): $(OBJS_CLIENT) $(LIBFT) $(FT_PRINTF)
+	$(CC) $(CFLAGS) $(OBJS_CLIENT) -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf -o $(NAME_CLIENT)
 
 clean:
-	rm -f *.o
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(FT_PRINTF_DIR) clean
+	rm -f $(OBJS_SERVER) $(OBJS_CLIENT)
 
 fclean: clean
-	rm -f server client
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(FT_PRINTF_DIR) fclean
+	rm -f $(NAME_SERVER) $(NAME_CLIENT)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus: all
+
+.PHONY: all clean fclean re bonus
