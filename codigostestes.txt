@@ -1,0 +1,30 @@
+VARIOS CLIENTES
+
+./client 12345 "Mensagem 1"
+./client 12345 "Mensagem 2"
+./client 12345 "Mensagem 3"
+
+VARIAS MENSAGENS
+
+for i in $(seq 1 5); do ./client 12345 "Mensagem $i" & done
+
+TESTE DE VELOCIDADE
+
+time ./client 12345 "$(python3 -c 'print("A" * 100)')"
+
+
+SIMULANDO LENTIDAO
+
+for c in $(echo -n "Teste lento" | grep -o .); do ./client 12345 "$c"; sleep 0.1; done
+
+ROBUSTEZ/FALHAS
+
+Interromper o servidor com CTRL+C no meio da Mensagem
+
+printf '\xff' | xargs ./client 12345
+
+
+Execucao bash
+
+chmod +x testes.sh
+./testes.sh 12345

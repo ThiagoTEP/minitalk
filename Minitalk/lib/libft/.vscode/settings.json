@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"stdio.h": "c",
-		"chrono": "c",
-		"functional": "c"
-	}
-}
