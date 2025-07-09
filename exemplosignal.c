@@ -14,12 +14,11 @@ int main(void)
 {
     int i = 0;
 
-    // Captura o sinal SIGINT (CTRL+C)
     signal(SIGINT, ack_handler);
 
     printf("Pressione CTRL+C para ver a mensagem (sem sair)...\n");
 
-    while (1)
+   while (1)
     {
         printf("Trabalhando... %d\n", i++);
         sleep(1); 
@@ -30,6 +29,6 @@ int main(void)
             g_ack = 0;
         }
     }
-
+    
     return 0;
 }
