@@ -1,5 +1,6 @@
 # include <signal.h>
 # include <unistd.h>
+#include <sys/types.h>
 
 /*
 signal.h: para sigaction, kill, SIGUSR1, SIGUSR2, etc.

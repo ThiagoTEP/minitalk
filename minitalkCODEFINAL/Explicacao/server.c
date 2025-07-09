@@ -1,5 +1,5 @@
 #include "minitalk.h"
-// Inclui definições e funções auxiliares (libft, structs, etc.)
+
 
 static t_data g_data;
 // Variável global (1 única) contendo client PID, bit counter e caractere em construção
