@@ -6,7 +6,7 @@ echo "-> ASCII simples"
 ./client $SERVER_PID "Hello World!"
 
 echo "-> ASCII simples 2"
-./client $SERVER_PID "42 SP"
+./client $SERVER_PID "42 Porto"
 
 echo "-> ASCII simples 2"
 ./client $SERVER_PID "Testando strings curtas"
