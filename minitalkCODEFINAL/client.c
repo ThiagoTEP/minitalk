@@ -6,7 +6,7 @@
 /*   By: thevaris <thevaris@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 09:49:47 by thevaris          #+#    #+#             */
-/*   Updated: 2025/07/07 09:49:52 by thevaris         ###   ########.fr       */
+/*   Updated: 2025/07/10 09:47:39 by thevaris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	send_byte(pid_t pid, unsigned char c)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(100);
+		usleep(500);
 		i--;
 	}
 }
